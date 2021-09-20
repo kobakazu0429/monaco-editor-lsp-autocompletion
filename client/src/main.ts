@@ -1,6 +1,27 @@
+import * as monaco from "monaco-editor";
+// import {
+//   createConnection,
+//   MonacoLanguageClient,
+//   MonacoServices,
+//   Services,
+// } from "monaco-languageclient";
+// import { createMessageConnection } from "vscode-jsonrpc";
+// import { AbstractMessageReader } from "vscode-jsonrpc/lib/messageReader.js";
+// import { AbstractMessageWriter } from "vscode-jsonrpc/lib/messageWriter.js";
+
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`;
+const editor = monaco.editor.create(app, {
+  language: "c",
+  theme: "vs-dark",
+  scrollbar: {
+    arrowSize: 11,
+  },
+  fontSize: 16,
+  wordWrap: "on",
+  minimap: {
+    enabled: false,
+  },
+  lineNumbers: "on",
+});
+editor.updateOptions({ tabSize: 2 });
