@@ -96,10 +96,10 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-monaco-editor-core@^0.22.3:
-  version "0.22.3"
-  resolved "https://registry.yarnpkg.com/monaco-editor-core/-/monaco-editor-core-0.22.3.tgz#decb2d53d4c87f1d838c4a78e27570f9aca2ecbd"
-  integrity sha512-QUA8fbVz769QBR5Xp8vKJngJM35PRvMuqDjVSsM5IJfWwwVEsQAKu/8SUD3jcEHfnE4YgQfeLktapBwJvWntgw==
+monaco-editor-core@^0.34.0:
+  version "0.34.1"
+  resolved "https://registry.yarnpkg.com/monaco-editor-core/-/monaco-editor-core-0.34.1.tgz#e51563e87f3ba392a86254fb7aeaa1ba8ae129f4"
+  integrity sha512-RaYj0HGvKZjy7H3HCluhypExLi2Z7rpHVKc4KQ6iShqY3TW5cKGaETrr4wJ7aPz2UAWVtGmXNjea/BpoCAjY+w==
 
 monaco-editor@^0.27.0:
   version "0.27.0"
