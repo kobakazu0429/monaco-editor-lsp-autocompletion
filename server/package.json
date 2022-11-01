@@ -10,7 +10,7 @@
     "ws": "^8.2.2",
     "@codingame/monaco-jsonrpc": "^0.3.1",
     "express": "^4.15.2",
-    "@codingame/monaco-languageclient": "^0.14.0",
+    "@codingame/monaco-languageclient": "^0.17.0",
     "vscode-languageserver": "7.0.0"
   },
   "devDependencies": {
