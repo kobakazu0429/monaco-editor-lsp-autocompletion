@@ -101,10 +101,10 @@ monaco-editor-core@^0.22.3:
   resolved "https://registry.yarnpkg.com/monaco-editor-core/-/monaco-editor-core-0.22.3.tgz#decb2d53d4c87f1d838c4a78e27570f9aca2ecbd"
   integrity sha512-QUA8fbVz769QBR5Xp8vKJngJM35PRvMuqDjVSsM5IJfWwwVEsQAKu/8SUD3jcEHfnE4YgQfeLktapBwJvWntgw==
 
-monaco-editor@^0.27.0:
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.27.0.tgz#4b69108bb1dc1f60174c5dcdf51bc5306ab5ba26"
-  integrity sha512-UhwP78Wb8w0ZSYoKXQNTV/0CHObp6NS3nCt51QfKE6sKyBo5PBsvuDOHoI2ooBakc6uIwByRLHVeT7+yXQe2fQ==
+monaco-editor@^0.34.0:
+  version "0.34.1"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.34.1.tgz#1b75c4ad6bc4c1f9da656d740d98e0b850a22f87"
+  integrity sha512-FKc80TyiMaruhJKKPz5SpJPIjL+dflGvz4CpuThaPMc94AyN7SeC9HQ8hrvaxX7EyHdJcUY5i4D0gNyJj1vSZQ==
 
 nanoid@^3.1.23:
   version "3.1.25"
