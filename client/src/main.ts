@@ -1,16 +1,20 @@
 import * as monaco from "monaco-editor";
-import { listen } from "@codingame/monaco-jsonrpc";
 import {
   MonacoLanguageClient,
-  MessageConnection,
   CloseAction,
   ErrorAction,
   MonacoServices,
-  createConnection,
-} from "@codingame/monaco-languageclient";
+  MessageTransports,
+} from "monaco-languageclient";
+import {
+  toSocket,
+  WebSocketMessageReader,
+  WebSocketMessageWriter,
+} from "vscode-ws-jsonrpc";
 import normalizeUrl from "normalize-url";
-import ReconnectingWebSocket from "reconnecting-websocket";
-import type { Options as ReconnectingWebSocketOptions } from "reconnecting-websocket";
+import ReconnectingWebSocket, {
+  type Options as ReconnectingWebSocketOptions,
+} from "reconnecting-websocket";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
@@ -52,21 +56,22 @@ editor.updateOptions({ tabSize: 2 });
 MonacoServices.install(monaco as any);
 
 // create the web socket
-const url = createUrl("/sampleServer");
+const url = createUrl("/lsp");
 const webSocket = createWebSocket(url);
-// listen when the web socket is opened
-listen({
-  webSocket: webSocket as any,
-  onConnection: (connection) => {
-    // create and start the language client
-    const languageClient = createLanguageClient(connection);
-    const disposable = languageClient.start();
-    connection.onClose(() => disposable.dispose());
-  },
-});
+webSocket.onopen = async () => {
+  const socket = toSocket(webSocket as any);
+  const reader = new WebSocketMessageReader(socket);
+  const writer = new WebSocketMessageWriter(socket);
+  const languageClient = createLanguageClient({
+    reader,
+    writer,
+  });
+  await languageClient.start();
+  reader.onClose(async () => await languageClient.stop());
+};
 
 function createLanguageClient(
-  connection: MessageConnection
+  transports: MessageTransports
 ): MonacoLanguageClient {
   return new MonacoLanguageClient({
     name: "Sample Language Client",
@@ -75,16 +80,14 @@ function createLanguageClient(
       documentSelector: ["c"],
       // disable the default error handler
       errorHandler: {
-        error: () => ErrorAction.Continue,
-        closed: () => CloseAction.DoNotRestart,
+        error: () => ({ action: ErrorAction.Continue }),
+        closed: () => ({ action: CloseAction.DoNotRestart }),
       },
     },
     // create a language client connection from the JSON RPC connection on demand
     connectionProvider: {
-      get: (errorHandler, closeHandler) => {
-        return Promise.resolve(
-          createConnection(connection, errorHandler, closeHandler)
-        );
+      get: () => {
+        return Promise.resolve(transports);
       },
     },
   });

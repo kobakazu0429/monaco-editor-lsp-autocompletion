@@ -7,16 +7,16 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "@types/node": "^16.9.4",
-    "typescript": "^4.3.2",
-    "vite": "^2.5.4"
+    "@types/node": "^18.11.9",
+    "typescript": "^4.8.4",
+    "vite": "^3.2.2"
   },
   "dependencies": {
-    "@codingame/monaco-jsonrpc": "^0.3.1",
-    "@codingame/monaco-languageclient": "^0.14.0",
-    "monaco-editor": "^0.27.0",
-    "monaco-editor-core": "^0.22.3",
-    "normalize-url": "^7.0.2",
-    "reconnecting-websocket": "^4.4.0"
+    "monaco-editor": "^0.34.1",
+    "monaco-editor-core": "^0.34.1",
+    "monaco-languageclient": "^4.0.1",
+    "normalize-url": "^7.2.0",
+    "reconnecting-websocket": "^4.4.0",
+    "vscode-ws-jsonrpc": "^2.0.0"
   }
 }

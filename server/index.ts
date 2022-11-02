@@ -1,10 +1,14 @@
-import * as http from "http";
-import * as url from "url";
-import * as net from "net";
-import * as ws from "ws";
-import * as express from "express";
-import * as rpc from "@codingame/monaco-jsonrpc";
-import { launch } from "./clangd-server-launcher";
+import path from "node:path";
+import url from "node:url";
+import type http from "node:http";
+import type net from "node:net";
+import { WebSocketServer } from "ws";
+import express from "express";
+import { type IWebSocket } from "vscode-ws-jsonrpc";
+import { launch } from "./clangd-server-launcher.js";
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+globalThis.__dirname == __dirname;
 
 process.on("uncaughtException", function (err: any) {
   console.error("Uncaught Exception: ", err.toString());
@@ -20,7 +24,7 @@ app.use(express.static(__dirname));
 // start the server
 const server = app.listen(3001);
 // create the web socket
-const wss = new ws.Server({
+const wss = new WebSocketServer({
   noServer: true,
   perMessageDeflate: false,
 });
@@ -28,9 +32,9 @@ server.on(
   "upgrade",
   (request: http.IncomingMessage, socket: net.Socket, head: Buffer) => {
     const pathname = request.url ? url.parse(request.url).pathname : undefined;
-    if (pathname === "/sampleServer") {
+    if (pathname === "/lsp") {
       wss.handleUpgrade(request, socket, head, (webSocket) => {
-        const socket: rpc.IWebSocket = {
+        const socket: IWebSocket = {
           send: (content) =>
             webSocket.send(content, (error) => {
               if (error) {
