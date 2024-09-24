@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "monaco-editor": "^0.34.1",
-    "monaco-editor-core": "^0.34.1",
+    "monaco-editor-core": "^0.52.0",
     "monaco-languageclient": "^4.0.1",
     "normalize-url": "^7.2.0",
     "reconnecting-websocket": "^4.4.0",
